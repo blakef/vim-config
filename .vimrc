@@ -1,3 +1,6 @@
+" Sourced this from the blog at:
+" http://unlogic.co.uk/posts/vim-python-ide.html
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -69,3 +72,8 @@ augroup vimrc_autocmds
     autocmd FileType python match Excess /\%120v.*/
     autocmd FileType python set nowrap
 augroup END
+
+" Use <leader>l to toggle display of whitespace
+nmap <leader>l :set list!<CR>
+" And set some nice chars to do it with
+" set listchars=tab:»\ ,eol:¬
