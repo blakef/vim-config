@@ -23,7 +23,6 @@ set t_Co=256
 
 " Python-mode
 " Activate rope
-" Keys:
 " K             Show python docs
 " <Ctrl-Space>  Rope autocomplete
 " <Ctrl-c>g     Rope goto definition
