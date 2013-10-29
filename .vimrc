@@ -12,7 +12,14 @@ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
-Bundle 'davidhalter/jei-vim'
+Bundle 'davidhalter/jedi-vim'
+
+" Python Lint
+let pymode_lint_ignore="E1122"
+" Disable pylint checking every save
+let g:pymode_lint_write = 0
+let g:pymode_run_key = 'R'
+let g:pymode_virtualenv = 1
 
 " The bundles you install will be listed here
 filetype plugin indent on
@@ -76,4 +83,4 @@ augroup END
 " Use <leader>l to toggle display of whitespace
 nmap <leader>l :set list!<CR>
 " And set some nice chars to do it with
-" set listchars=tab:»\ ,eol:¬
+set listchars=tab:»\ ,eol:¬
