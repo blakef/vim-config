@@ -1,6 +1,8 @@
 " Sourced this from the blog at:
 " http://unlogic.co.uk/posts/vim-python-ide.html
 
+set tabstop=4 shiftwidth=4 expandtab
+syntax on
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -13,6 +15,18 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'scrooloose/syntastic'
+Bundle 'ervandew/supertab'
+
+" Jedi
+let g:jedi#popup_on_dot=0
+
+" Supertab
+let g:SuperTabDefaultCompletionType="context"
+
+" Linting
+let g:syntastic_check_on_open=1
 
 " Python Lint
 let pymode_lint_ignore="E1122"
@@ -70,6 +84,9 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+
+" Backspace on insertion mode
+set backspace=2
 
 " 120 Character limit
 augroup vimrc_autocmds
