@@ -4,6 +4,7 @@
 set tabstop=4 shiftwidth=4 expandtab
 syntax on
 set nocompatible
+set nu
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -18,6 +19,9 @@ Bundle 'davidhalter/jedi-vim'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'scrooloose/syntastic'
 Bundle 'ervandew/supertab'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'othree/yajs.vim'
+Bundle 'leafgarland/typescript-vim'
 
 " Jedi
 let g:jedi#popup_on_dot=0
@@ -26,7 +30,8 @@ let g:jedi#popup_on_dot=0
 let g:SuperTabDefaultCompletionType="context"
 
 " Linting
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open = 1
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Python Lint
 let pymode_lint_ignore="E1122"
