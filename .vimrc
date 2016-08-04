@@ -1,40 +1,47 @@
-" Sourced this from the blog at:
-" http://unlogic.co.uk/posts/vim-python-ide.html
-
-set tabstop=4 shiftwidth=4 expandtab
-syntax on
 set nocompatible
-set nu
+
+let g:dotvim = fnamemodify($MYVIMRC, ':h')
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'klen/python-mode'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'scrooloose/syntastic'
-Bundle 'ervandew/supertab'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'othree/yajs.vim'
-Bundle 'leafgarland/typescript-vim'
+" call vundle#rc()
 
-" Jedi
-let g:jedi#popup_on_dot=0
+call vundle#begin()
+Plugin 'gmarik/vundle'
 
-" Supertab
-let g:SuperTabDefaultCompletionType="context"
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Raimondi/delimitMate'
 
-" Linting
-let g:syntastic_check_on_open = 1
-let g:syntastic_javascript_checkers = ['eslint']
+Plugin 'MPiccinato/wombat256'
+
+Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ggreer/the_silver_searcher'
+
+" Markdown
+Plugin 'plasticboy/vim-markdown'
+" Python
+Plugin 'klen/python-mode'
+" CoffeeScript
+Plugin 'kchmck/vim-coffee-script'
+" Go
+Plugin 'jstemmer/gotags'
+Plugin 'fatih/vim-go'
+" Erlang
+Plugin 'jimenezrick/vimerl'
+" Javascript
+Plugin 'scrooloose/syntastic'
+
+call vundle#end()
 
 " Python Lint
 let pymode_lint_ignore="E1122"
+
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
 let g:pymode_run_key = 'R'
@@ -43,12 +50,41 @@ let g:pymode_virtualenv = 1
 " The bundles you install will be listed here
 filetype plugin indent on
 
-map <F2> :NERDTreeToggle<CR>
+" Misc 
+let mapleader=","
+set number
+
+set colorcolumn=120
+
+map <leader>n :NERDTreeToggle<CR>
+nmap <F8> :TagbarToggle<CR>
+
+" Colour Scheme
+set background=dark
+colorscheme wombat256
+
+if has("gui_running")
+  highlight ColourColumn guibg=darkgray
+else
+  highlight ColourColumn ctermbg=darkgray
+endif
+
+" You Complete Me
+let g:ycm_confirm_extra_conf    = 0
+let g:ycm_global_ycm_extra_conf = g:dotvim.'/ycm.py'
+let g:ycm_extra_conf_vim_data   = ['&filetype']
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_enable_diagnostic_signs = 0
 
 " Powerline
-set guifont=DejaVu\ Sans\ Mono\ for\ PowerLine\ 9
-set laststatus=2
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
 set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+set laststatus=2
 
 " Python-mode
 " Activate rope
@@ -90,9 +126,6 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " Don't autofold code
 let g:pymode_folding = 0
 
-" Backspace on insertion mode
-set backspace=2
-
 " 120 Character limit
 augroup vimrc_autocmds
     autocmd!
@@ -106,3 +139,67 @@ augroup END
 nmap <leader>l :set list!<CR>
 " And set some nice chars to do it with
 set listchars=tab:»\ ,eol:¬
+
+" Jedi Configuration
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+
+" ctrlp
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" ag
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+endif
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+syntax on
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=4
+set backspace=indent,eol,start
+
+set list!
+set listchars=tab:>-
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
