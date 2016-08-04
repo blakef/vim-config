@@ -1,5 +1,8 @@
 set nocompatible
 
+set tabstop=4 shiftwidth=4 expandtab
+syntax on
+
 let g:dotvim = fnamemodify($MYVIMRC, ':h')
 
 filetype off
@@ -42,6 +45,10 @@ call vundle#end()
 " Python Lint
 let pymode_lint_ignore="E1122"
 
+" Javascript Lint
+let g:syntastic_check_on_open = 1
+let g:syntastic_javascript_checkers = ['eslint']
+
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
 let g:pymode_run_key = 'R'
@@ -49,6 +56,11 @@ let g:pymode_virtualenv = 1
 
 " The bundles you install will be listed here
 filetype plugin indent on
+
+" Nerdtree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Misc 
 let mapleader=","
