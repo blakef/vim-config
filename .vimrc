@@ -1,7 +1,6 @@
 set nocompatible
 
 set tabstop=4 shiftwidth=4 expandtab
-syntax on
 
 let g:dotvim = fnamemodify($MYVIMRC, ':h')
 
@@ -41,6 +40,15 @@ Plugin 'jimenezrick/vimerl'
 Plugin 'scrooloose/syntastic'
 
 call vundle#end()
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Python Lint
 let pymode_lint_ignore="E1122"
