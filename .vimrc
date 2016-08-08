@@ -192,6 +192,7 @@ set softtabstop=4
 set tabstop=4
 set backspace=indent,eol,start
 set foldmethod=indent
+set autoindent
 
 set list!
 set listchars=tab:>-
