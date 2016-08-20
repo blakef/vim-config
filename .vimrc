@@ -1,13 +1,7 @@
-set nocompatible
+set nocompatible  " required
+filetype off      " required
 
-set tabstop=4 shiftwidth=4 expandtab
-syntax on
-
-let g:dotvim = fnamemodify($MYVIMRC, ':h')
-
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-" call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/  " required
 
 call vundle#begin()
 Plugin 'gmarik/vundle'
@@ -40,8 +34,23 @@ Plugin 'fatih/vim-go'
 Plugin 'jimenezrick/vimerl'
 " Javascript
 Plugin 'scrooloose/syntastic'
+Plugin 'marijnh/tern_for_vim'
 
 call vundle#end()
+
+filetype plugin indent on   " required
+syntax on                   " must be after vundle
+
+let g:dotvim = fnamemodify($MYVIMRC, ':h')
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Python Lint
 let pymode_lint_ignore="E1122"
@@ -54,9 +63,6 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:pymode_lint_write = 0
 let g:pymode_run_key = 'R'
 let g:pymode_virtualenv = 1
-
-" The bundles you install will be listed here
-filetype plugin indent on
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -179,12 +185,15 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Misc code formatting
 syntax on
 set expandtab
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set tabstop=4
 set backspace=indent,eol,start
+set foldmethod=indent
+set autoindent
 
 set list!
 set listchars=tab:>-
