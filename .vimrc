@@ -25,6 +25,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ggreer/the_silver_searcher'
+Plugin 'lambdatoast/elm.vim'
 
 " Markdown
 Plugin 'plasticboy/vim-markdown'
