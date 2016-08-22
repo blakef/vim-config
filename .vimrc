@@ -20,6 +20,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ggreer/the_silver_searcher'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'lambdatoast/elm.vim'
 
 " Markdown
 Plugin 'plasticboy/vim-markdown'
