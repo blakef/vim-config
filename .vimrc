@@ -19,6 +19,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ggreer/the_silver_searcher'
+Plugin 'editorconfig/editorconfig-vim'
 
 " Markdown
 Plugin 'plasticboy/vim-markdown'
@@ -34,6 +35,8 @@ Plugin 'jimenezrick/vimerl'
 " Javascript
 Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
+" TypeScript
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 
@@ -46,6 +49,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["html"] }
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -57,6 +63,19 @@ let pymode_lint_ignore="E1122"
 " Javascript Lint
 let g:syntastic_check_on_open = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+" HTML
+let g:syntastic_html_tidy_ignore_errors=["proprietary attribute \"ng-"]
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
 
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
@@ -186,13 +205,15 @@ let g:syntastic_check_on_wq = 0
 
 " Misc code formatting
 syntax on
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+
 set tabstop=4
+set shiftwidth=4
+set expandtab
+
 set backspace=indent,eol,start
 set foldmethod=indent
 set autoindent
+set nowrap
 
 set list!
 set listchars=tab:>-
