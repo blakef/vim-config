@@ -212,8 +212,12 @@ set shiftwidth=4
 set expandtab
 
 set backspace=indent,eol,start
+" Auto open fold on open
 set foldmethod=indent
 set autoindent
+if has("autocmd")
+    autocmd BufWinEnter * silent! :%foldopen!
+endif
 set nowrap
 
 set list!
