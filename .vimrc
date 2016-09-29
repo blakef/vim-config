@@ -20,14 +20,13 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ggreer/the_silver_searcher'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'lambdatoast/elm.vim'
 
+" Elm
+Plugin 'lambdatoast/elm.vim'
 " Markdown
 Plugin 'plasticboy/vim-markdown'
 " Python
 Plugin 'klen/python-mode'
-" CoffeeScript
-Plugin 'kchmck/vim-coffee-script'
 " Go
 Plugin 'jstemmer/gotags'
 Plugin 'fatih/vim-go'
@@ -38,6 +37,9 @@ Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
+" HTML
+Plugin 'mattn/emmet-vim'
+
 
 call vundle#end()
 
@@ -77,6 +79,11 @@ highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
+" TypeScript
+if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
