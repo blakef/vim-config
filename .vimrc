@@ -4,7 +4,7 @@ filetype off      " required
 set rtp+=~/.vim/bundle/vundle/  " required
 
 call vundle#begin()
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
 Plugin 'majutsushi/tagbar'
