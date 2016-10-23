@@ -15,6 +15,8 @@ Plugin 'MPiccinato/wombat256'
 
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'gregsexton/gitv'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -30,6 +32,7 @@ Plugin 'klen/python-mode'
 " Go
 Plugin 'jstemmer/gotags'
 Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 " Erlang
 Plugin 'jimenezrick/vimerl'
 " Javascript
@@ -37,9 +40,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
 " HTML
 Plugin 'mattn/emmet-vim'
-
 
 call vundle#end()
 
@@ -120,6 +124,10 @@ let g:ycm_global_ycm_extra_conf = g:dotvim.'/ycm.py'
 let g:ycm_extra_conf_vim_data   = ['&filetype']
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_enable_diagnostic_signs = 0
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " Powerline
 set guifont=Inconsolata\ for\ Powerline:h15
