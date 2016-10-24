@@ -42,7 +42,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 " HTML
 Plugin 'mattn/emmet-vim'
