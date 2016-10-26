@@ -87,6 +87,15 @@ highlight link SyntasticStyleWarningSign SignColumn
 " TypeScript
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+
+autocmd FileType typescript :set makeprg=tsc
+
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+" Other
 
 if has("gui_macvim")
     set ballooneval
