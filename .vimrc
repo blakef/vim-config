@@ -4,6 +4,8 @@ filetype off      " required
 set rtp+=~/.vim/bundle/vundle/  " required
 
 call vundle#begin()
+Plugin 'gmarik/vundle'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
@@ -42,7 +44,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'marijnh/tern_for_vim'
 " TypeScript
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 " HTML
 Plugin 'mattn/emmet-vim'
@@ -86,6 +87,14 @@ highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
 " TypeScript
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+if has("gui_macvim")
+    set ballooneval
+    autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+endif
+
 if !exists("g:ycm_semantic_triggers")
     let g:ycm_semantic_triggers = {}
 endif
