@@ -26,6 +26,7 @@ Plugin 'ggreer/the_silver_searcher'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'junegunn/vim-easy-align'
 
 " Elm
 Plugin 'lambdatoast/elm.vim'
@@ -67,6 +68,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
 " Python Lint
 let pymode_lint_ignore="E1122"
 
@@ -88,7 +93,7 @@ highlight link SyntasticStyleWarningSign SignColumn
 
 " TypeScript
 let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescript_checkers = ['tslint']
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 
@@ -97,12 +102,14 @@ autocmd FileType typescript :set makeprg=tsc
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-" Other
-
-if has("gui_macvim")
+if has("gui_running")
     set ballooneval
     autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+else
+    autocmd FileType typescript nnoremap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 endif
+
+" Other
 
 if !exists("g:ycm_semantic_triggers")
     let g:ycm_semantic_triggers = {}
@@ -127,6 +134,16 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+" GoDoc shortcuts
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
@@ -307,3 +324,7 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+inoremap <Esc> <Nop>
+inoremap jk <Esc>
+inoremap kj <Esc>wa
