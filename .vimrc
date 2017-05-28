@@ -135,15 +135,15 @@ autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>s <Plug>(go-implements)
-
-" GoDoc shortcuts
+" Go: Docs and Defs
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+" Go: Info under curosr
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
 
 " Disable pylint checking every save
 let g:pymode_lint_write = 0
@@ -151,7 +151,7 @@ let g:pymode_run_key = 'R'
 let g:pymode_virtualenv = 1
 
 " Nerdtree
-map <C-n> :NERDTreeToggle<CR>
+noremap <c-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
@@ -161,8 +161,7 @@ set number
 
 set colorcolumn=120
 
-map <leader>n :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " Colour Scheme
 set background=dark
@@ -194,9 +193,12 @@ let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
 set termencoding=utf-8
 set laststatus=2
+
+if !has("gui_running")
+    set term=xterm-256color
+endif
 
 " Python-mode
 " Activate rope
@@ -237,6 +239,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+set foldlevelstart=99
 
 " 120 Character limit
 augroup vimrc_autocmds
@@ -248,7 +251,7 @@ augroup vimrc_autocmds
 augroup END
 
 " Use <leader>l to toggle display of whitespace
-nmap <leader>l :set list!<CR>
+nnoremap <leader>l :set list!<CR>
 " And set some nice chars to do it with
 set listchars=tab:»\ ,eol:¬
 
@@ -325,6 +328,15 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-inoremap <Esc> <Nop>
+" 
+" Lets get more efficient
+"
 inoremap jk <Esc>
 inoremap kj <Esc>wa
+
+" foo_bar -> FOO_BAR as I type
+inoremap <c-u> <Esc>viwUA                   
+
+" edit vimrc on the fly
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>    
+nnoremap <leader>sv :source $MYVIMRC<cr>
